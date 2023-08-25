@@ -18,7 +18,10 @@ const product1Mock = {
   name: 'Martelo de Thor',
 };
 
+const notFound = 'Product not found';
+
 module.exports = {
   productsMock,
   product1Mock,
+  notFound,
 };
