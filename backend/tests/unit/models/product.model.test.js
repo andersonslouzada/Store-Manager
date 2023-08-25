@@ -8,7 +8,7 @@ describe('Testa o products model: ', function () {
   it('Se ao fazer uma requisição para o endpoint  GET /products, retorna o resultado esperado', async function () {
     sinon.stub(connection, 'execute').resolves([productsMock]);
     const products = await productModel.findAll();
-    expect(products).to.be.deep.equal(productModel);
+    expect(products).to.be.deep.equal(productsMock);
     expect(products).to.be.an('array');
   });
 

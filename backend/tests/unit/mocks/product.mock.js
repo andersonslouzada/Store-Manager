@@ -18,10 +18,22 @@ const product1Mock = {
   name: 'Martelo de Thor',
 };
 
-const notFound = 'Product not found';
+const productsMockService = {
+  status: 'SUCCESSFUL',
+  data: productsMock,
+};
+
+const productMockService = {
+  status: 'SUCCESSFUL',
+  data: product1Mock,
+};
+
+const notFound = { message: 'Product not found' };
 
 module.exports = {
   productsMock,
   product1Mock,
   notFound,
+  productMockService,
+  productsMockService,
 };

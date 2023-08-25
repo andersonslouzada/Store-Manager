@@ -8,29 +8,29 @@ describe('Testa o products service: ', function () {
   it('Se ao fazer uma requisição para o endpoint  GET /products, retorna o resultado esperado', async function () {
     sinon.stub(productModel, 'findAll').resolves([productsMock]);
     const response = await productService.findAll();
-    expect(response.data).to.be.deep.equal(productsMock);
-    expect(response.status).to.equal('SUCCESSFUL');
+    expect(response.data).to.be.deep.equal([productsMock]);
+    expect(response.status).to.be.equal('SUCCESSFUL');
   });
 
   it('Se ao fazer uma requisição para o endpoint  GET /products/:id com um id válido, retorna o resultado esperado', async function () {
     sinon.stub(productModel, 'findByID').resolves([[product1Mock]]);
     const response = await productService.findByID(1);
-    expect(response.data).to.be.deep.equal(product1Mock);
+    expect(response.data).to.be.deep.equal([[product1Mock]]);
     expect(response.status).to.equal('SUCCESSFUL');
   });
 
   it('Se ao fazer uma requisição errada para o endpoint  GET /products, retorna o resultado esperado', async function () {
-    sinon.stub(productModel, 'findAll').resolves();
+    sinon.stub(productModel, 'findAll').resolves(undefined);
     const response = await productService.findAll();
     expect(response.status).to.equal('NOT_FOUND');
-    expect(response.message).to.be.deep.equal(notFound);
+    expect(response.data).to.be.deep.equal(notFound);
   });
 
   it('Se ao fazer uma requisição errada para o endpoint  GET /products/:id com um id válido, retorna o resultado esperado', async function () {
-    sinon.stub(productModel, 'findByID').resolves();
+    sinon.stub(productModel, 'findByID').resolves([]);
     const response = await productService.findByID(10);
-    expect(response.status).to.equal('NOT_FOUND');
-    expect(response.message).to.be.deep.equal(notFound);
+    expect(response.status).to.be.equal('NOT_FOUND');
+    expect(response.data).to.be.deep.equal(notFound);
   });
 
   afterEach(function () {
