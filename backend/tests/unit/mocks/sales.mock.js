@@ -37,9 +37,33 @@ const saleMockService = {
   data: sale1Mock,
 };
 
+const newProductsMock = [
+  {
+    productId: 1,
+    quantity: 1,
+  },
+  {
+    productId: 2,
+    quantity: 5,
+  },
+];
+
+const saleAddedMock = {
+  id: 3,
+  itemsSold: newProductsMock,
+};
+
+const addSaleSuccess = {
+  status: 'CREATED',
+  data: saleAddedMock,
+};
+
 module.exports = {
   salesMock,
   sale1Mock,
   salesMockService,
   saleMockService,
+  newProductsMock,
+  saleAddedMock,
+  addSaleSuccess,
 };

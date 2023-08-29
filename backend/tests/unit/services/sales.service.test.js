@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { salesModel } = require('../../../src/models');
 const { salesService } = require('../../../src/services');
-const { salesMock, sale1Mock } = require('../mocks/sales.mock');
+const { salesMock, sale1Mock, newProductsMock, saleAddedMock } = require('../mocks/sales.mock');
 
 describe('Testa o products service: ', function () {
   it('Se ao fazer uma requisição para o endpoint  GET /products, retorna o resultado esperado', async function () {
@@ -35,5 +35,12 @@ describe('Testa o products service: ', function () {
 
   afterEach(function () {
     sinon.restore();
+  });
+
+  it('Se ao fazer uma requisição para o endpoint POST /sales, retorna o resultado esperado', async function () {
+    sinon.stub(salesModel, 'addProductSale').resolves(3);
+    const sales = await salesService.addSale(newProductsMock);
+    expect(sales.status).to.equal('CREATED');
+    expect(sales.data).to.deep.equal(saleAddedMock);
   });
 });

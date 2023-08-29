@@ -12,14 +12,14 @@ const getProductByID = async (req, res) => {
   return res.status(mapStatusHTTP(status)).json(data);
 };
 
-const addSales = async (req, res) => {
+const addSale = async (req, res) => {
   const products = req.body;
-  const { status, data } = await salesService.saveNewSale(products);
+  const { status, data } = await salesService.addSale(products);
   return res.status(mapStatusHTTP(status)).json(data);
 };
 
 module.exports = {
   getAllProducts,
   getProductByID,
-  addSales,
+  addSale,
 };
