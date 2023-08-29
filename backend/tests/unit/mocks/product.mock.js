@@ -28,12 +28,9 @@ const productMockService = {
   data: product1Mock,
 };
 
-const notFound = { message: 'Product not found' };
-
 module.exports = {
   productsMock,
   product1Mock,
-  notFound,
   productMockService,
   productsMockService,
 };

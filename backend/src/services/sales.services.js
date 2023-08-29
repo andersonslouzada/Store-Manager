@@ -6,8 +6,8 @@ const findAll = async () => {
   return { status: 'SUCCESSFUL', data };
 };
 
-const findByID = async (productID) => {
-  const data = await salesModel.findByID(productID);
+const findByID = async (saleID) => {
+  const data = await salesModel.findByID(saleID);
   if (!data || data.length === 0) { 
     return { status: 'NOT_FOUND', data: { message: 'Sale not found' } };
   }

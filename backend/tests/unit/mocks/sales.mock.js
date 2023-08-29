@@ -37,12 +37,9 @@ const saleMockService = {
   data: sale1Mock,
 };
 
-const notFound = { message: 'Sale not found' };
-
 module.exports = {
   salesMock,
   sale1Mock,
   salesMockService,
   saleMockService,
-  notFound,
 };

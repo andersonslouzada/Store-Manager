@@ -2,7 +2,7 @@ const { productModel } = require('../models');
 
 const findAll = async () => {
   const data = await productModel.findAll();
-  if (!data) return { status: 'NOT_FOUND', data: { message: 'Product not found' } };
+  if (!data) return { status: 'NOT_FOUND', data: { message: 'Products not found' } };
   return { status: 'SUCCESSFUL', data };
 };
 
