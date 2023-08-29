@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
 const { productModel } = require('../../../src/models');
-const { productsMock, product1Mock } = require('../mocks/product.mock');
+const { productsMock, product1Mock, newProduct } = require('../mocks/product.mock');
 
 describe('Testa o products model: ', function () {
   it('Se ao fazer uma requisição para o endpoint  GET /products, retorna o resultado esperado', async function () {
@@ -17,6 +17,13 @@ describe('Testa o products model: ', function () {
     const product = await productModel.findByID(1);
     expect(product).to.be.deep.equal(product1Mock);
     expect(product).to.be.an('object');
+  });
+
+  it('Se ao fazer uma requisição para o endpoint  POST /products com uma requisição válida, retorna o resultado esperado', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 4 }]);
+    const id = await productModel.addProduct(newProduct.name);
+    expect(id).to.be.deep.equal(4);
+    expect(id).to.be.an('number');
   });
 
   afterEach(function () {

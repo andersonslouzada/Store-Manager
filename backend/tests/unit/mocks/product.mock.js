@@ -28,9 +28,21 @@ const productMockService = {
   data: product1Mock,
 };
 
+const newProduct = { name: 'ProductX' };
+
+const productAdded = { id: 4, name: 'ProductX' };
+
+const productAddedSucess = {
+  status: 'CREATED',
+  data: productAdded,
+};
+
 module.exports = {
   productsMock,
   product1Mock,
   productMockService,
   productsMockService,
+  newProduct,
+  productAdded,
+  productAddedSucess,
 };
