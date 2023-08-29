@@ -1,7 +1,7 @@
 const { productService } = require('../services');
 const mapStatusHTTP = require('../utils/mapStatusHTTP');
 
-const getAllProducts = async (req, res) => {
+const getAllProducts = async (_req, res) => {
   const { status, data } = await productService.findAll();
   return res.status(mapStatusHTTP(status)).json(data);
 };
@@ -12,7 +12,15 @@ const getProductByID = async (req, res) => {
   return res.status(mapStatusHTTP(status)).json(data);
 };
 
+const addProduct = async (req, res) => {
+  const product = req.body;
+
+  const { status, data } = await productService.addProduct(product);
+  return res.status(mapStatusHTTP(status)).json(data);
+};
+
 module.exports = {
   getAllProducts,
   getProductByID,
+  addProduct,
 };
