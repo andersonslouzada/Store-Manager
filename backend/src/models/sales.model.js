@@ -10,14 +10,14 @@ const findAll = async () => {
   return sales;
 };
 
-const findByID = async (saleId) => {
+const findByID = async (id) => {
   const [sale] = await connection.execute(
     `SELECT date, product_id AS productId, quantity FROM sales_products 
     INNER JOIN sales s
     ON s.id = sale_id 
     WHERE id = ?
     ORDER BY product_id;`,
-    [saleId],
+    [id],
   );
   return sale;
 };
@@ -40,8 +40,15 @@ const addProductSale = async (products) => {
   return saleId;
 };
 
+const deleteSale = async (saleId) => {
+  const [{ affectedRows }] = await connection
+    .execute('DELETE FROM sales WHERE id = ?', [saleId]);
+  return affectedRows;
+};
+
 module.exports = {
   findAll,
   findByID,
   addProductSale,
+  deleteSale,
 };

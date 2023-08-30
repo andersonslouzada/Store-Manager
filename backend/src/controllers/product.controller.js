@@ -33,6 +33,7 @@ const deleteProduct = async (req, res) => {
   if (product) return res.status(mapStatusHTTP(status)).end();
   if (!product) return res.status(mapStatusHTTP(status)).json(data);
 };
+  
 module.exports = {
   getAllProducts,
   getProductByID,
