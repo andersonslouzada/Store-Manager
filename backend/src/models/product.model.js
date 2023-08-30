@@ -24,21 +24,22 @@ const addProduct = async (name) => {
   return insertId;
 };
 
-// const updateProduct = async (id, name) => {
-//   const [{ productToUpdate }] = await connection
-//     .execute('UPDATE products SET name = ? WHERE id = ?', [name, id]);
-//   return productToUpdate;
-//   };
+const updateProduct = async (id, name) => {
+  const [{ productToUpdate }] = await connection
+    .execute('UPDATE products SET name = ? WHERE id = ?', [name, id]);
+  return productToUpdate;
+};
 
-  const updateProduct = async (productId, newName) => {
-    const [{ affectedRows }] = await connection.execute(`
-    UPDATE products SET name = ? WHERE id = ? `, [newName, productId]);
-    return affectedRows;
-  };
+const deleteProduct = async (id) => {
+  const [{ productToDelete }] = await connection
+    .execute('DELETE FROM products WHERE id = ?', [id]);
+  return productToDelete;
+};
 
 module.exports = {
   findAll,
   findByID,
   addProduct,
   updateProduct,
+  deleteProduct,
 };

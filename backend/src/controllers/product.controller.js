@@ -18,25 +18,25 @@ const addProduct = async (req, res) => {
   return res.status(mapStatusHTTP(status)).json(data);
 };
 
-// const updateProduct = async (req, res) => {
-//   const { id } = req.params;
-//   const productToUpdate = req.body;
-  
-//   const { status, data } = await productService.updateProduct(id, productToUpdate);
-//   return res.status(mapStatusHTTP(status)).json(data);
-// };
-
 const updateProduct = async (req, res) => {
-  const productToUpdate = req.body;
   const { id } = req.params;
-
+  const productToUpdate = req.body;
+  
   const { status, data } = await productService.updateProduct(id, productToUpdate);
   return res.status(mapStatusHTTP(status)).json(data);
 };
 
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  const { status, data, product } = await productService.deleteProduct(id);
+
+  if (product) return res.status(mapStatusHTTP(status)).end();
+  if (!product) return res.status(mapStatusHTTP(status)).json(data);
+};
 module.exports = {
   getAllProducts,
   getProductByID,
   addProduct,
   updateProduct,
+  deleteProduct,
 };
