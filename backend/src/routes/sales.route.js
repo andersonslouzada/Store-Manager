@@ -1,9 +1,9 @@
 const route = require('express').Router();
 const { salesController } = require('../controllers');
-const saleValidation = require('../middlewares/saleValidation');
+const { idValidation, quantityValidation } = require('../middlewares/saleValidation');
 
 route.get('/', salesController.getAllProducts);
 route.get('/:id', salesController.getProductByID);
-route.post('/', saleValidation, salesController.addSale);
+route.post('/', idValidation, quantityValidation, salesController.addSale);
 
 module.exports = route;

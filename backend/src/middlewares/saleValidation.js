@@ -24,9 +24,7 @@ const quantityValidation = (req, res, next) => {
   next();
 };
 
-const saleValidation = [
+module.exports = { 
   idValidation,
   quantityValidation,
-];
-
-module.exports = saleValidation;
+ };
