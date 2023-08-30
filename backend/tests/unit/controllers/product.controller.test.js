@@ -2,8 +2,9 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const { productService } = require('../../../src/services');
-const { productsMock, product1Mock, productsMockService, productMockService, productAddedSucess, productAdded } = require('../mocks/product.mock');
+const { productsMock, product1Mock, productsMockService, productMockService, productAddedSucess, productAdded, productDeleteSucessMock, productDeleteFailedMock } = require('../mocks/product.mock');
 const { productController } = require('../../../src/controllers');
+const { productModel } = require('../../../src/models');
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -40,5 +41,29 @@ describe('Testa o products controller:', function () {
 
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(productAdded);
+  });
+
+  it('Se ao fazer uma requisição válida para o endpoint DELETE /products/:id, retorna o resultado esperado', async function () {
+    sinon.stub(productService, 'deleteProduct').resolves(productDeleteSucessMock);
+    const req = { params: { id: 1 } };
+    const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+    await productController.deleteProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+  });
+
+  it('Se ao fazer uma requisição inválida para o endpoint DELETE /products/:id, retorna o resultado esperado', async function () {
+    sinon.stub(productModel, 'deleteProduct').resolves(-8);
+    sinon.stub(productService, 'deleteProduct').resolves(productDeleteFailedMock);
+    const req = { params: { id: 5 } };
+    const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+    await productController.deleteProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
+
+  afterEach(function () {
+    sinon.restore();
   });
 });

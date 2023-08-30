@@ -30,7 +30,7 @@ const deleteProduct = async (req, res) => {
   const { id } = req.params;
   const { status, data, product } = await productService.deleteProduct(id);
 
-  if (product) return res.status(mapStatusHTTP(status)).end();
+  if (product) return res.status(status).json();
   if (!product) return res.status(mapStatusHTTP(status)).json(data);
 };
   

@@ -36,7 +36,7 @@ const deleteProduct = async (id) => {
   }
 
   await productModel.deleteProduct(id);
-  return { status: 'DELETED', product: true };
+  return { status: 204, product: true };
 };
 
 module.exports = { 

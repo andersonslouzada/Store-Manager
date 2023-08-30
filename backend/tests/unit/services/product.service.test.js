@@ -45,6 +45,14 @@ describe('Testa o products service: ', function () {
     expect(responseProduct.data).to.deep.equal(productAdded);
   });
 
+  it('Se ao fazer uma requisição para o endpoint  DELETE /products/:id com uma requisição válida, retorna o resultado esperado', async function () {
+    sinon.stub(productModel, 'findByID').resolves({ id: 1, name: 'Product 1' });
+    sinon.stub(productModel, 'deleteProduct').resolves();
+    const response = await productService.deleteProduct(1);
+
+    expect(response).to.deep.equal({ status: 204, product: true });
+  });
+
   afterEach(function () {
     sinon.restore();
   });

@@ -29,12 +29,25 @@ const productMockService = {
 };
 
 const newProduct = { name: 'ProductX' };
+// const newProductAdded = { id: 4, name: 'Capa da invisibilidade' };
+// const updatedProduct = { id: 1, name: 'ProductY' };
 
 const productAdded = { id: 4, name: 'ProductX' };
 
 const productAddedSucess = {
   status: 'CREATED',
   data: productAdded,
+};
+
+const productDeleteSucessMock = {
+  status: 204,
+  product: true,
+};
+
+const productDeleteFailedMock = {
+  status: 'NOT_FOUND',
+  data: { message: 'Product not found' },
+  product: false,
 };
 
 module.exports = {
@@ -45,4 +58,6 @@ module.exports = {
   newProduct,
   productAdded,
   productAddedSucess,
+  productDeleteSucessMock,
+  productDeleteFailedMock,
 };
