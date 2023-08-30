@@ -22,7 +22,7 @@ const quantityValidation = (req, res, next) => {
   }
 
   next();
-};
+};  
 
 module.exports = { 
   idValidation,

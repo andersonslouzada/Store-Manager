@@ -33,6 +33,13 @@ const deleteProduct = async (req, res) => {
   if (product) return res.status(status).json();
   if (!product) return res.status(mapStatusHTTP(status)).json(data);
 };
+
+const findProduct = async (req, res) => {
+  const { q } = req.query;
+  const { status, data } = await productService.findProduct(q);
+
+  return res.status(mapStatusHTTP(status)).json(data);
+};
   
 module.exports = {
   getAllProducts,
@@ -40,4 +47,5 @@ module.exports = {
   addProduct,
   updateProduct,
   deleteProduct,
+  findProduct,
 };
