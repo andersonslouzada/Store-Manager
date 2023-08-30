@@ -18,8 +18,25 @@ const addProduct = async (req, res) => {
   return res.status(mapStatusHTTP(status)).json(data);
 };
 
+// const updateProduct = async (req, res) => {
+//   const { id } = req.params;
+//   const productToUpdate = req.body;
+  
+//   const { status, data } = await productService.updateProduct(id, productToUpdate);
+//   return res.status(mapStatusHTTP(status)).json(data);
+// };
+
+const updateProduct = async (req, res) => {
+  const productToUpdate = req.body;
+  const { id } = req.params;
+
+  const { status, data } = await productService.updateProduct(id, productToUpdate);
+  return res.status(mapStatusHTTP(status)).json(data);
+};
+
 module.exports = {
   getAllProducts,
   getProductByID,
   addProduct,
+  updateProduct,
 };

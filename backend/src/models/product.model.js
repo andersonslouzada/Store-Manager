@@ -21,12 +21,24 @@ const addProduct = async (name) => {
     'INSERT INTO products (name) VALUE (?)',
     [name],
   );
-
   return insertId;
 };
+
+// const updateProduct = async (id, name) => {
+//   const [{ productToUpdate }] = await connection
+//     .execute('UPDATE products SET name = ? WHERE id = ?', [name, id]);
+//   return productToUpdate;
+//   };
+
+  const updateProduct = async (productId, newName) => {
+    const [{ affectedRows }] = await connection.execute(`
+    UPDATE products SET name = ? WHERE id = ? `, [newName, productId]);
+    return affectedRows;
+  };
 
 module.exports = {
   findAll,
   findByID,
   addProduct,
+  updateProduct,
 };
