@@ -12,6 +12,7 @@ const findByID = async (productId) => {
     'SELECT * FROM products WHERE id = ?',
     [productId],
   );
+  if (product === undefined) return false;
   return product;
 };
 
